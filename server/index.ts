@@ -180,8 +180,14 @@ app.get('/api/hello', async () => ({
 }))
 
 // Em produção: servir o Vue compilado
+// Detecta se está rodando do dist/ ou diretamente
+const isCompiledVersion = __dirname.includes('dist')
+const htmlPath = isCompiledVersion
+  ? path.join(__dirname, '../../html') // server/dist/ -> html/
+  : path.join(__dirname, '../html') // server/ -> html/
+
 await app.register(fastifyStatic, {
-  root: path.join(__dirname, '../html'),
+  root: htmlPath,
   prefix: '/',
   decorateReply: true,
 })
