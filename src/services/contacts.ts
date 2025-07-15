@@ -16,13 +16,13 @@ export const contactsService = {
   // Listar todos os contatos
   async getAll(): Promise<Contact[]> {
     const response = await api.get('/contacts')
-    return response.data
+    return response.data.data || response.data
   },
 
   // Buscar contato por ID
   async getById(id: number): Promise<Contact> {
     const response = await api.get(`/contacts/${id}`)
-    return response.data
+    return response.data.data || response.data
   },
 
   // Criar novo contato
@@ -42,7 +42,7 @@ export const contactsService = {
         'Content-Type': 'multipart/form-data',
       },
     })
-    return response.data
+    return response.data.data || response.data
   },
 
   // Atualizar contato existente
@@ -62,7 +62,7 @@ export const contactsService = {
         'Content-Type': 'multipart/form-data',
       },
     })
-    return response.data
+    return response.data.data || response.data
   },
 
   // Deletar contato

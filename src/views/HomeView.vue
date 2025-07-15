@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ConfirmationModal from '@/components/ConfirmationModal.vue'
 import ContactCard from '@/components/ContactCard.vue'
 import { useContacts } from '@/composables/useContacts'
 import { useNotifications } from '@/composables/useNotifications'
@@ -73,43 +74,47 @@ const handleDeleteCancel = () => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-50 py-8">
+  <div class="min-h-screen min-w-screen bg-gray-50 py-4 sm:py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Cabeçalho -->
-      <div class="mb-8">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+      <div class="mb-6 sm:mb-8">
+        <div
+          class="flex flex-col space-y-4 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between"
+        >
           <div>
-            <h1 class="text-3xl font-bold text-gray-900">Contatos</h1>
-            <p class="mt-2 text-sm text-gray-600">
+            <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">Contatos</h1>
+            <p class="mt-1 sm:mt-2 text-sm text-gray-700">
               Gerencie seus contatos de forma simples e organizada
             </p>
           </div>
-          <div class="mt-4 sm:mt-0">
+          <div class="w-full sm:w-auto">
             <UButton
               @click="goToAddContact"
               icon="i-heroicons-plus"
-              size="lg"
+              :size="{ xs: 'md', sm: 'lg' }"
               color="primary"
               variant="solid"
+              class="w-full sm:w-auto justify-center"
             >
-              Adicionar Contato
+              <span class="sm:hidden">Adicionar</span>
+              <span class="hidden sm:inline">Adicionar Contato</span>
             </UButton>
           </div>
         </div>
       </div>
 
       <!-- Estado de Loading -->
-      <div v-if="loading" class="flex justify-center items-center py-12">
+      <div v-if="loading" class="flex justify-center items-center py-8 sm:py-12">
         <div class="text-center">
           <div
-            class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto"
+            class="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-b-2 border-primary-500 mx-auto"
           ></div>
-          <p class="mt-4 text-sm text-gray-600">Carregando contatos...</p>
+          <p class="mt-4 text-sm text-gray-700">Carregando contatos...</p>
         </div>
       </div>
 
       <!-- Estado de Erro -->
-      <div v-else-if="error" class="py-12">
+      <div v-else-if="error" class="py-8 sm:py-12 px-4 sm:px-0">
         <UAlert
           :title="'Erro ao carregar contatos'"
           :description="error"
@@ -124,7 +129,13 @@ const handleDeleteCancel = () => {
           @close="clearError"
         />
         <div class="mt-4 text-center">
-          <UButton @click="fetchContacts" variant="outline" icon="i-heroicons-arrow-path">
+          <UButton
+            @click="fetchContacts"
+            variant="outline"
+            icon="i-heroicons-arrow-path"
+            :size="{ xs: 'md', sm: 'lg' }"
+            class="w-full sm:w-auto"
+          >
             Tentar Novamente
           </UButton>
         </div>
@@ -133,14 +144,16 @@ const handleDeleteCancel = () => {
       <!-- Lista de Contatos -->
       <div v-else-if="hasContacts">
         <div class="mb-4">
-          <p class="text-sm text-gray-600">
+          <p class="text-sm text-gray-700">
             {{ contacts.length }}
             {{ contacts.length === 1 ? 'contato encontrado' : 'contatos encontrados' }}
           </p>
         </div>
 
         <!-- Grid responsivo de contatos -->
-        <div class="grid gap-4 md:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div
+          class="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
+        >
           <ContactCard
             v-for="contact in contacts"
             :key="contact.id"
@@ -153,8 +166,8 @@ const handleDeleteCancel = () => {
       </div>
 
       <!-- Estado Vazio -->
-      <div v-else class="text-center py-12">
-        <div class="mx-auto h-24 w-24 text-gray-400">
+      <div v-else class="text-center py-8 sm:py-12">
+        <div class="mx-auto h-16 w-16 sm:h-24 sm:w-24 text-gray-600">
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path
               stroke-linecap="round"
@@ -164,10 +177,20 @@ const handleDeleteCancel = () => {
             />
           </svg>
         </div>
-        <h3 class="mt-4 text-lg font-medium text-gray-900">Nenhum contato encontrado</h3>
-        <p class="mt-2 text-sm text-gray-500">Que tal começar adicionando seu primeiro contato?</p>
-        <div class="mt-6">
-          <UButton @click="goToAddContact" icon="i-heroicons-plus" size="lg" color="primary">
+        <h3 class="mt-4 text-base sm:text-lg font-medium text-gray-900">
+          Nenhum contato encontrado
+        </h3>
+        <p class="mt-2 text-sm text-gray-700 px-4">
+          Que tal começar adicionando seu primeiro contato?
+        </p>
+        <div class="mt-6 px-4">
+          <UButton
+            @click="goToAddContact"
+            icon="i-heroicons-plus"
+            :size="{ xs: 'md', sm: 'lg' }"
+            color="primary"
+            class="w-full sm:w-auto"
+          >
             Adicionar Primeiro Contato
           </UButton>
         </div>
@@ -176,10 +199,11 @@ const handleDeleteCancel = () => {
 
     <!-- Modal de Confirmação para Deletar Contato -->
     <ConfirmationModal
+      v-if="showDeleteModal && contactToDelete"
       :is-open="showDeleteModal"
       :loading="deletingContact"
       title="Confirmar Exclusão"
-      :message="`Tem certeza que deseja excluir o contato '${contactToDelete?.name}'? Esta ação não pode ser desfeita.`"
+      :message="`Tem certeza que deseja excluir o contato '${contactToDelete.name}'? Esta ação não pode ser desfeita.`"
       confirm-text="Excluir"
       cancel-text="Cancelar"
       @confirm="handleDeleteConfirm"

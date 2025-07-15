@@ -55,8 +55,9 @@ const clearSubmitError = () => {
           @click="handleCancel"
           icon="i-heroicons-arrow-left"
           variant="ghost"
-          color="gray"
+          color="zinc"
           size="sm"
+          class="text-gray-700 hover:text-gray-900 hover:bg-gray-100"
         >
           Voltar para lista
         </UButton>
@@ -65,7 +66,7 @@ const clearSubmitError = () => {
       <!-- Cabeçalho -->
       <div class="mb-8">
         <h1 class="text-3xl font-bold text-gray-900">Adicionar Contato</h1>
-        <p class="mt-2 text-sm text-gray-600">
+        <p class="mt-2 text-sm text-gray-700">
           Preencha as informações abaixo para criar um novo contato
         </p>
       </div>

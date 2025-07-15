@@ -94,7 +94,8 @@ onMounted(() => {
           @click="goToHome"
           icon="i-heroicons-arrow-left"
           variant="ghost"
-          color="gray"
+          color="zinc"
+          class="text-gray-700 hover:text-gray-900 hover:bg-gray-100"
           size="sm"
         >
           Voltar para lista
@@ -107,7 +108,7 @@ onMounted(() => {
           <div
             class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto"
           ></div>
-          <p class="mt-4 text-sm text-gray-600">Carregando contato...</p>
+          <p class="mt-4 text-sm text-gray-800">Carregando contato...</p>
         </div>
       </div>
 
@@ -177,8 +178,8 @@ onMounted(() => {
               </div>
               <div>
                 <h3 class="text-sm font-medium text-gray-900">Telefone</h3>
-                <p class="text-lg text-gray-700 mt-1">{{ formatPhone(contact.contact) }}</p>
-                <p class="text-xs text-gray-500 mt-1">Número de contato</p>
+                <p class="text-lg text-gray-800 mt-1">{{ formatPhone(contact.contact) }}</p>
+                <p class="text-xs text-gray-800 mt-1">Número de contato</p>
               </div>
             </div>
 
@@ -203,8 +204,8 @@ onMounted(() => {
               </div>
               <div>
                 <h3 class="text-sm font-medium text-gray-900">Email</h3>
-                <p class="text-lg text-gray-700 mt-1">{{ contact.email }}</p>
-                <p class="text-xs text-gray-500 mt-1">Endereço de email</p>
+                <p class="text-lg text-gray-800 mt-1">{{ contact.email }}</p>
+                <p class="text-xs text-gray-800 mt-1">Endereço de email</p>
               </div>
             </div>
           </div>
@@ -219,6 +220,7 @@ onMounted(() => {
               color="blue"
               variant="solid"
               size="lg"
+              class="w-full sm:w-auto justify-center sm:justify-start text-gray-700 hover:text-gray-900 hover:bg-gray-100"
             >
               Editar Contato
             </UButton>
@@ -227,6 +229,7 @@ onMounted(() => {
               icon="i-heroicons-trash"
               color="red"
               variant="outline"
+              class="w-full sm:w-auto justify-center sm:justify-start text-gray-700 hover:text-gray-900 hover:bg-gray-100"
               size="lg"
             >
               Deletar Contato
@@ -246,6 +249,7 @@ onMounted(() => {
         "
         confirm-text="Deletar"
         cancel-text="Cancelar"
+        class="w-full sm:w-auto justify-center sm:justify-start text-gray-700 hover:text-gray-900 hover:bg-gray-100"
         :loading="isDeleting"
         @confirm="handleDelete"
         @cancel="cancelDelete"

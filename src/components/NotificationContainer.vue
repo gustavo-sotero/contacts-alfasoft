@@ -28,14 +28,14 @@
               <p :class="['text-sm font-medium', getTitleColor(notification.type)]">
                 {{ notification.title }}
               </p>
-              <p v-if="notification.description" class="mt-1 text-sm text-gray-500">
+              <p v-if="notification.description" class="mt-1 text-sm text-gray-700">
                 {{ notification.description }}
               </p>
             </div>
             <div class="ml-4 flex-shrink-0 flex">
               <button
                 @click="remove(notification.id)"
-                class="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                class="bg-white rounded-md inline-flex text-gray-600 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 <span class="sr-only">Fechar</span>
                 <XMarkIcon class="h-5 w-5" />
@@ -86,7 +86,7 @@ const getIconColor = (type: string) => {
     case 'info':
       return 'text-blue-400'
     default:
-      return 'text-gray-400'
+      return 'text-gray-600'
   }
 }
 

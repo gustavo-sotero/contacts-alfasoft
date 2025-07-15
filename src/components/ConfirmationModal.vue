@@ -12,10 +12,10 @@
             {{ title }}
           </h3>
           <UButton
-            color="gray"
-            variant="ghost"
+            color="zinc"
+            variant="outline"
             icon="i-heroicons-x-mark-20-solid"
-            class="-my-1"
+            class="-my-1 text-gray-700 hover:text-gray-900 border-gray-300 hover:border-gray-400"
             :disabled="loading"
             @click="handleCancel"
           />
@@ -43,7 +43,13 @@
 
       <template #footer>
         <div class="flex gap-3 justify-end">
-          <UButton color="gray" variant="outline" :disabled="loading" @click="handleCancel">
+          <UButton
+            color="zinc"
+            variant="outline"
+            class="text-gray-700 hover:text-gray-900 border-gray-300 hover:border-gray-400"
+            :disabled="loading"
+            @click="handleCancel"
+          >
             {{ cancelText }}
           </UButton>
 

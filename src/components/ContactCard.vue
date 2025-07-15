@@ -1,31 +1,36 @@
 <template>
   <UCard
-    class="hover:shadow-lg transition-shadow duration-200 cursor-pointer"
+    class="hover:shadow-lg transition-shadow duration-200 cursor-pointer h-full flex flex-col"
     @click="$emit('view-details', contact)"
   >
     <template #header>
-      <div class="flex items-center gap-4">
-        <UAvatar :src="contact.picture" :alt="contact.name" size="lg" class="flex-shrink-0" />
+      <div class="flex items-center gap-3 sm:gap-4 p-1">
+        <UAvatar
+          :src="contact.picture"
+          :alt="contact.name"
+          :size="{ xs: 'lg', sm: 'xl' }"
+          class="flex-shrink-0"
+        />
         <div class="flex-1 min-w-0">
-          <h3 class="text-lg font-semibold text-gray-900 dark:text-white truncate">
+          <h3 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white truncate">
             {{ contact.name }}
           </h3>
-          <p class="text-sm text-gray-500 dark:text-gray-400">ID: {{ contact.id }}</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">ID: {{ contact.id }}</p>
         </div>
       </div>
     </template>
 
-    <div class="space-y-3">
+    <div class="flex-1 space-y-4 py-2">
       <!-- Informações de contato -->
-      <div class="flex items-center gap-2">
-        <PhoneIcon class="h-4 w-4 text-gray-400 flex-shrink-0" />
-        <span class="text-sm text-gray-700 dark:text-gray-300">
+      <div class="flex items-center gap-3">
+        <PhoneIcon class="h-5 w-5 text-gray-400 flex-shrink-0" />
+        <span class="text-sm text-gray-700 dark:text-gray-300 font-medium">
           {{ formatPhone(contact.contact) }}
         </span>
       </div>
 
-      <div class="flex items-center gap-2">
-        <EnvelopeIcon class="h-4 w-4 text-gray-400 flex-shrink-0" />
+      <div class="flex items-center gap-3">
+        <EnvelopeIcon class="h-5 w-5 text-gray-400 flex-shrink-0" />
         <span class="text-sm text-gray-700 dark:text-gray-300 truncate">
           {{ contact.email }}
         </span>
@@ -33,39 +38,38 @@
     </div>
 
     <template #footer>
-      <div class="flex flex-wrap gap-2 justify-end">
-        <UButton
-          icon="i-heroicons-eye"
-          size="sm"
-          color="blue"
-          variant="ghost"
-          @click.stop="$emit('view-details', contact)"
-          class="flex-shrink-0 min-w-0"
-        >
-          <span class="hidden sm:inline">Ver</span>
-          <span class="sm:hidden">Ver</span>
-        </UButton>
-        <UButton
-          icon="i-heroicons-pencil"
-          size="sm"
-          color="gray"
-          variant="ghost"
-          @click.stop="$emit('edit', contact)"
-          class="flex-shrink-0 min-w-0"
-        >
-          <span class="hidden sm:inline">Editar</span>
-          <span class="sm:hidden">Editar</span>
-        </UButton>
+      <div class="flex flex-col gap-2 pt-2">
+        <div class="flex gap-2">
+          <UButton
+            icon="i-heroicons-eye"
+            size="sm"
+            color="blue"
+            variant="ghost"
+            @click.stop="$emit('view-details', contact)"
+            class="flex-1 justify-center text-gray-700 hover:text-blue-700 hover:bg-blue-50"
+          >
+            Ver
+          </UButton>
+          <UButton
+            icon="i-heroicons-pencil"
+            size="sm"
+            color="zinc"
+            variant="ghost"
+            @click.stop="$emit('edit', contact)"
+            class="flex-1 justify-center text-gray-700 hover:text-zinc-700 hover:bg-zinc-50"
+          >
+            Editar
+          </UButton>
+        </div>
         <UButton
           icon="i-heroicons-trash"
           size="sm"
           color="red"
           variant="ghost"
           @click.stop="$emit('delete', contact)"
-          class="flex-shrink-0 min-w-0"
+          class="w-full justify-center text-gray-700 hover:text-red-700 hover:bg-red-50"
         >
-          <span class="hidden sm:inline">Deletar</span>
-          <span class="sm:hidden">Deletar</span>
+          Deletar
         </UButton>
       </div>
     </template>

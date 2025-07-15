@@ -97,7 +97,7 @@
 
         <div class="space-y-2">
           <UButton
-            color="gray"
+            class="text-gray-500"
             variant="outline"
             icon="i-heroicons-photo"
             :disabled="loading"
@@ -127,10 +127,10 @@
       </UButton>
 
       <UButton
-        color="gray"
+        color="zinc"
         variant="outline"
         :disabled="loading"
-        class="flex-1 sm:flex-none order-1 sm:order-2"
+        class="flex-1 sm:flex-none order-1 sm:order-2 text-gray-700 hover:text-gray-900 border-gray-300 hover:border-gray-400"
         size="lg"
         @click="$emit('cancel')"
       >

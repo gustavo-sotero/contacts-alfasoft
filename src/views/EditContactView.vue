@@ -99,8 +99,9 @@ onMounted(() => {
           @click="handleCancel"
           icon="i-heroicons-arrow-left"
           variant="ghost"
-          color="gray"
+          color="zinc"
           size="sm"
+          class="text-gray-700 hover:text-gray-900 hover:bg-gray-100"
         >
           {{ contact ? 'Voltar para detalhes' : 'Voltar para lista' }}
         </UButton>
@@ -112,7 +113,7 @@ onMounted(() => {
           <div
             class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto"
           ></div>
-          <p class="mt-4 text-sm text-gray-600">Carregando dados do contato...</p>
+          <p class="mt-4 text-sm text-gray-700">Carregando dados do contato...</p>
         </div>
       </div>
 
@@ -146,10 +147,10 @@ onMounted(() => {
             <UAvatar :src="contact.picture" :alt="contact.name" size="lg" />
             <div>
               <h1 class="text-3xl font-bold text-gray-900">Editar Contato</h1>
-              <p class="text-sm text-gray-500">{{ contact.name }} - ID: {{ contact.id }}</p>
+              <p class="text-sm text-gray-700">{{ contact.name }} - ID: {{ contact.id }}</p>
             </div>
           </div>
-          <p class="text-sm text-gray-600">Altere as informações abaixo para atualizar o contato</p>
+          <p class="text-sm text-gray-700">Altere as informações abaixo para atualizar o contato</p>
         </div>
 
         <!-- Erro de submissão -->
